@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&L - Nosso Casamento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container container">
+            <a href="#" class="logo">L&L</a>
+            <button class="hamburger" id="hamburger-button" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="#historia">Nossa História</a>
+                <a href="#rsvp">Confirmar Presença</a>
+                <a href="#festa">A Festa</a>
+                <a href="#presentes">Lista de Presentes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Larissa & Leonardo</h1>
+            <p>03 de Junho de 2026</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Seção Nossa História -->
+        <section id="historia" class="section">
+            <h2>Nossa História</h2>
+            <div class="slider-container">
+                <div class="slider">
+                    <!-- Imagens serão inseridas aqui dinamicamente ou estaticamente -->
+                    <img src="assets/images/pic01.jpg" alt="Foto do casal 1" class="slide active">
+                    <img src="assets/images/pic02.jpg" alt="Foto do casal 2" class="slide">
+                    <img src="assets/images/pic03.jpg" alt="Foto do casal 3" class="slide">
+                    <img src="assets/images/pic04.jpg" alt="Foto do casal 3" class="slide">
+                    <img src="assets/images/pic05.jpg" alt="Foto do casal 3" class="slide">
+                </div>
+                <button class="slider-btn prev-btn">&lt;</button>
+                <button class="slider-btn next-btn">&gt;</button>
+            </div>
+            <p class="story-text">
+                Era uma vez... um texto facilmente editável que conta a linda e emocionante jornada do casal, desde o primeiro encontro até a decisão de compartilharem uma vida inteira juntos. Cada momento, cada sorriso e cada desafio superado os trouxeram até aqui, prontos para o "sim" mais importante de suas vidas.
+            </p>
+        </section>
+
+        <!-- Seção Confirmação de Presença -->
+        <section id="rsvp" class="section">
+            <h2>Confirmação de Presença</h2>
+            <p>Sua presença é o nosso maior presente! Por favor, confirme até 10/05/2026.</p>
+            <a href="#" id="rsvp-link" class="btn btn-primary" target="_blank">Confirmar Presença</a>
+        </section>
+
+        <!-- Seção Informações da Festa -->
+        <section id="festa" class="section">
+            <h2>Informações da Festa</h2>
+            <div class="party-info-layout">
+                <div class="party-details">
+                    <div class="info-item">
+                        <span class="label">📅 Data</span>
+                        <span class="value">03 de Junho de 2026</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">⏰ Horário</span>
+                        <span class="value">16:00</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">📍 Local</span>
+                        <span class="value">
+                            Sollar da Árvore<br>Rod. Mogi-Bertioga, 3790 - Vila Caputera, Mogi das Cruzes-SP
+                            <div class="route-buttons">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=-23.5652611,-46.1894225" target="_blank" class="btn btn-primary btn-sm">🚗 Google Maps</a>
+                                <a href="https://waze.com/ul?ll=-23.5652611,-46.1894225&navigate=yes" target="_blank" class="btn btn-secondary btn-sm">🚗 Waze</a>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.088602545061!2d-46.1894225!3d-23.565261099999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdd8f137533e89%3A0xed32e43d0c596a97!2sSollar%20da%20%C3%81rvore!5e0!3m2!1spt-BR!2sbr!4v1765767584728!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Lista de Presentes -->
+        <section id="presentes" class="section">
+            <h2>Lista de Presentes</h2>
+            <div class="gift-intro">
+                <p>Construir nosso lar é um sonho que estamos realizando juntos. Se desejar nos presentear, criamos uma lista com itens que farão parte do nosso dia a dia. Fiquem à vontade para escolher!</p>
+            </div>
+            <!-- <div id="gift-list-preview" class="gift-list">
+            </div>-->
+            <div style="text-align: center; margin-top: 2.5rem;">
+                <a href="lista-presentes.html" class="btn btn-primary">Ver Lista de Presentes</a>
+            </div>
+        </section>
+
+        <!-- Seção Contato dos Noivos / PIX -->
+        <section id="contato" class="section">
+            <h2>Mimos para os Noivos</h2>
+            <p>Se sentir em seu coração, você pode nos presentear com um mimo via PIX.</p>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <h3>👰 Noiva</h3>
+                    <p>Chave PIX (E-mail):</p>
+                    <strong id="pix-noiva-key"></strong>
+                    <button class="btn btn-secondary btn-copy-pix" data-target-id="pix-noiva-key">💸 Copiar PIX</button>
+                    <a href="#" id="whatsapp-noiva" class="btn btn-whatsapp" target="_blank">📲 Falar com a Noiva</a>
+                </div>
+                <div class="contact-card">
+                    <h3>🤵 Noivo</h3>
+                    <p>Chave PIX (E-mail):</p>
+                    <strong id="pix-noivo-key"></strong>
+                    <button class="btn btn-secondary btn-copy-pix" data-target-id="pix-noivo-key">💸 Copiar PIX</button>
+                    <a href="#" id="whatsapp-noivo" class="btn btn-whatsapp" target="_blank">📲 Falar com o Noivo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Feito com ❤️ por Lari & Leo</p>
+        <p>2026</p>
+    </footer>
+
+    <!-- Modal Genérico -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body">
+                <!-- Conteúdo do modal será inserido aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/presentes.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - L&L</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="login-container">
+        <h2>Área Restrita</h2>
+        <p>Apenas para os noivos e administradores.</p>
+        <div class="form-group">
+            <input type="password" id="admin-password" placeholder="Senha de Acesso">
+        </div>
+        <button id="btn-login" class="btn btn-primary" style="width: 100%;">Entrar</button>
+        <p id="login-error" style="color: red; display: none; margin-top: 1rem;">Senha incorreta.</p>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin-dashboard" class="container" style="display: none; padding-top: 2rem;">
+        <header class="admin-header">
+            <h1>Controle de Presentes</h1>
+            <a href="index.html" class="btn btn-outline" target="_blank">Ver Site</a>
+        </header>
+
+        <div class="admin-controls">
+            <button id="btn-open-add-modal" class="btn btn-primary">+ Novo Presente</button>
+            
+            <div class="filter-group">
+                <label for="filter-status">Status:</label>
+                <select id="filter-status">
+                    <option value="all">Todos</option>
+                    <option value="disponivel">Disponíveis</option>
+                    <option value="comprado">Comprados</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sort-order">Ordenar:</label>
+                <select id="sort-order">
+                    <option value="name-asc">Nome (A-Z)</option>
+                    <option value="price-asc">ID (Criação)</option>
+                    <option value="status">Status</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">Img</th>
+                        <th>Presente</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-gift-list">
+                    <!-- JS renders here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">Adicionar Presente</h2>
+            <form id="gift-form">
+                <input type="hidden" id="gift-id">
+                <div class="form-group">
+                    <label for="gift-name">Nome do Presente</label>
+                    <input type="text" id="gift-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="gift-desc">Descrição</label>
+                    <textarea id="gift-desc" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="gift-img">URL da Imagem</label>
+                    <input type="url" id="gift-img" placeholder="https://..." required>
+                </div>
+                <div class="form-group">
+                    <label for="gift-status">Status Inicial</label>
+                    <select id="gift-status">
+                        <option value="disponivel">Disponível</option>
+                        <option value="comprado">Comprado</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/presentes.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

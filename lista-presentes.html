@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes - L&L</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Specific header for this page */
+        .page-header {
+            background-color: var(--color-primary);
+            color: var(--color-light);
+            padding: 6rem 0 3rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            color: var(--color-light);
+            font-size: 3rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--color-light);
+            text-decoration: underline;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container container">
+            <a href="index.html" class="logo">L&L</a>
+            <button class="hamburger" id="hamburger-button" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html#historia">Nossa História</a>
+                <a href="index.html#festa">A Festa</a>
+                <a href="index.html#presentes">Lista de Presentes</a>
+                <a href="index.html#rsvp">Confirmar Presença</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Lista de Presentes</h1>
+            <p>Escolha um item para nos presentear</p>
+            ◀️ <a href="index.html#presentes" class="back-link"> Voltar para o site</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <div id="gift-list-container" class="gift-list">
+                <!-- Gifts loaded by JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Feito com ❤️ por Lari & Leo</p>
+        <p>2026</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/presentes.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Override the default behavior if necessary, or ensure main.js detects the page
+        // Actually, main.js likely calls renderizarListaDePresentes() automatically.
+        // We will adjust main.js to handle both pages.
+    </script>
+
+</body>
+</html>
