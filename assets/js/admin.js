@@ -153,25 +153,33 @@ document.addEventListener('DOMContentLoaded', () => {
         // O método mais seguro no firebase é usar push(), mas para manter IDs numéricos
         // vamos pegar o maior ID atual + 1.
         
-        const salvar = (idFinal) => {
+        const salvar = async (idFinal) => {
+            const isEditing = !!idVal;
+            let existing = null;
+
+            if (isEditing) {
+                const presentes = await buscarTodosPresentesOnce();
+                existing = presentes.find(p => p.id == idVal);
+            }
+
             const giftData = {
                 id: idFinal,
                 nome,
                 descricao: desc,
                 imagem: img,
                 status,
-                // Mantém dados antigos se for edição
-                informadoPara: null, 
-                dataCompra: status === 'comprado' ? Date.now() : null
+                informadoPara: isEditing && existing ? existing.informadoPara : null,
+                dataCompra: isEditing && existing ? existing.dataCompra : null
             };
 
-            // Se for edição, preservar campos extras que não estão no form
-            if (idVal) {
-                const existing = listaPresentesCache.find(p => p.id == idVal);
-                if (existing) {
-                    giftData.informadoPara = existing.informadoPara;
-                    if (status === existing.status) giftData.dataCompra = existing.dataCompra;
+            if (isEditing && existing) {
+                if (status === 'comprado' && status !== existing.status) {
+                    giftData.dataCompra = Date.now();
+                } else if (status === 'disponivel' && status !== existing.status) {
+                    giftData.dataCompra = null;
                 }
+            } else if (status === 'comprado') {
+                giftData.dataCompra = Date.now();
             }
 
             salvarPresente(giftData)

@@ -1,7 +1,3 @@
-// =================================================================================
-// SCRIPT PRINCIPAL (index.html e lista-presentes.html)
-// =================================================================================
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- ELEMENTOS DO DOM ---
@@ -12,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModalBtn = modal ? modal.querySelector('.close-btn') : null;
     const hamburgerButton = document.getElementById('hamburger-button');
     const navLinks = document.getElementById('nav-links');
+    const searchInput = document.getElementById('search-input');
+    const sortAzBtn = document.getElementById('sort-az');
 
     // --- MENU HAMBURGER ---
     if (hamburgerButton && navLinks) {
@@ -36,45 +34,81 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- RENDERIZAÇÃO DE PRESENTES ---
 
-    // Cache local dos presentes para usar no modal sem buscar novamente
     let listaPresentesCache = [];
+    const viewState = {
+        searchTerm: '',
+        sort: 'default' // 'default', 'az'
+    };
 
     function inicializarLista() {
-        // Mostra loading inicial se quiser
         const containers = [giftListPreview, giftListContainer].filter(c => c);
         containers.forEach(c => c.innerHTML = '<p>Carregando presentes...</p>');
 
-        // Inscreve no listener do Firebase
         escutarPresentes((presentes) => {
-            listaPresentesCache = presentes; // Atualiza cache
-            renderizar(presentes);
+            listaPresentesCache = presentes;
+            applyFiltersAndSorting();
         });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                viewState.searchTerm = e.target.value;
+                applyFiltersAndSorting();
+            });
+        }
+
+        if (sortAzBtn) {
+            sortAzBtn.addEventListener('click', () => {
+                viewState.sort = viewState.sort === 'az' ? 'default' : 'az';
+                sortAzBtn.textContent = viewState.sort === 'az' ? 'Remover Ordem' : 'Ordenar de A-Z';
+                applyFiltersAndSorting();
+            });
+        }
+    }
+
+    function applyFiltersAndSorting() {
+        let items = [...listaPresentesCache];
+
+        // 1. Filtrar
+        if (viewState.searchTerm) {
+            const lowerCaseSearch = viewState.searchTerm.toLowerCase();
+            items = items.filter(p => p.nome.toLowerCase().includes(lowerCaseSearch));
+        }
+
+        // 2. Ordenar
+        if (viewState.sort === 'az') {
+            items.sort((a, b) => a.nome.localeCompare(b.nome));
+        }
+
+        renderizar(items);
     }
 
     function renderizar(presentes) {
         let container = null;
-        let items = [];
+        let itemsToRender = [];
 
         if (giftListPreview) {
             container = giftListPreview;
-            const disponiveis = presentes.filter(p => p.status !== 'comprado');
-            const comprados = presentes.filter(p => p.status === 'comprado');
-            items = [...disponiveis, ...comprados].slice(0, 3);
+            // A visualização prévia não deve ser afetada pelos filtros, mas sim pelo cache original
+            const disponiveis = listaPresentesCache.filter(p => p.status !== 'comprado');
+            const comprados = listaPresentesCache.filter(p => p.status === 'comprado');
+            itemsToRender = [...disponiveis, ...comprados].slice(0, 3);
         } else if (giftListContainer) {
             container = giftListContainer;
-            items = presentes;
+            itemsToRender = presentes; // Usa a lista já processada
         } else {
             return; 
         }
 
         container.innerHTML = '';
 
-        if (!items || items.length === 0) {
-            container.innerHTML = '<p>Nossa lista de presentes está sendo preparada!</p>';
+        if (!itemsToRender || itemsToRender.length === 0) {
+            container.innerHTML = viewState.searchTerm 
+                ? '<p>Nenhum presente encontrado para sua busca.</p>'
+                : '<p>Nossa lista de presentes está sendo preparada!</p>';
             return;
         }
 
-        items.forEach(presente => {
+        itemsToRender.forEach(presente => {
             const isComprado = presente.status === 'comprado';
             const card = document.createElement('div');
             card.className = 'gift-card';
@@ -101,9 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const botoes = document.querySelectorAll('.gift-card .btn-primary:not([disabled])');
         botoes.forEach(botao => {
             botao.addEventListener('click', (e) => {
-                const id = parseInt(e.target.dataset.id);
-                // Busca do cache atualizado
-                const presente = listaPresentesCache.find(p => p.id === id);
+                const id = e.target.dataset.id;
+                const presente = listaPresentesCache.find(p => p.id == id);
                 if(presente) abrirModalDeConfirmacao(presente);
             });
         });
@@ -128,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>Presentear: ${presente.nome}</h3>
             <p>Ficamos muito felizes com seu carinho! Para combinar a entrega, avise um de nós pelo WhatsApp.</p>
             <div class="contact-cards" style="margin-top: 1rem;">
+                <button class="btn" onclick="buscarPresenteNaWeb('${presente.nome}')">
+                    Buscar presente na web 🌐
+                </button>
                 <button class="btn btn-whatsapp" onclick="informarCompra('${presente.id}', 'noiva')">
                     Avisar a Noiva 👰
                 </button>
@@ -143,8 +179,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Função global acessível pelo onclick do HTML string
+    window.buscarPresenteNaWeb = (nomeDoPresente) => {
+        const query = encodeURIComponent(nomeDoPresente);
+        window.open(`https://www.google.com/search?q=${query}&tbm=shop`, '_blank');
+    };
+
+    // Função global acessível pelo onclick do HTML string
     window.informarCompra = (id, quem) => {
-        // Converte ID para numero pois vem como string do onclick
         const presente = listaPresentesCache.find(p => p.id == id);
         if (!presente) return;
 

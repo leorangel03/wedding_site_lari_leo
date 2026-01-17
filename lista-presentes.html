@@ -8,56 +8,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        /* Specific header for this page */
-        .page-header {
-            background-color: var(--color-primary);
-            color: var(--color-light);
-            padding: 6rem 0 3rem;
-            text-align: center;
-        }
-        .page-header h1 {
-            color: var(--color-light);
-            font-size: 3rem;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--color-light);
-            text-decoration: underline;
-            font-size: 1.1rem;
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <div class="navbar-container container">
-            <a href="index.html" class="logo">L&L</a>
-            <button class="hamburger" id="hamburger-button" aria-label="Menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <div class="nav-links" id="nav-links">
-                <a href="index.html#historia">Nossa História</a>
-                <a href="index.html#festa">A Festa</a>
-                <a href="index.html#presentes">Lista de Presentes</a>
-                <a href="index.html#rsvp">Confirmar Presença</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="page-header">
-        <div class="container">
-            <h1>Lista de Presentes</h1>
-            <p>Escolha um item para nos presentear</p>
-            ◀️ <a href="index.html#presentes" class="back-link"> Voltar para o site</a>
-        </div>
-    </header>
-
     <main class="container">
         <section class="section">
+            <div class="page-header-filters">
+                <div class="header-content">
+                    <h1>Lista de Presentes</h1>
+                    <p>Sinta-se à vontade para nos presentear com um destes itens ou algo de sua escolha. Sua presença é o nosso maior presente!</p>
+                    <button onclick="window.location.href='index.html#presentes'" class="btn btn-outline">Voltar ao Início</button>
+                </div>
+                <div class="filter-controls">
+                    <div class="search-wrapper">
+                        <input type="text" id="search-input" placeholder="Buscar presente...">
+                    </div>
+                    <div class="sort-wrapper">
+                        <button id="sort-az" class="btn btn-outline">
+                            Ordenar A-Z
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div id="gift-list-container" class="gift-list">
                 <!-- Gifts loaded by JS -->
             </div>

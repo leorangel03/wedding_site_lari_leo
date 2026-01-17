@@ -612,3 +612,89 @@ p {
         font-size: 1.2rem;
     }
 }
+
+/* Style for the new button in the modal */
+.modal-content .contact-cards {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.modal-content .btn {
+    width: 100%;
+}
+
+/* Header/Filtros da Lista de Presentes */
+.page-header-filters {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    background-color: var(--color-light);
+    box-shadow: var(--shadow);
+}
+
+.header-content p {
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+}
+
+.header-content .btn {
+    margin-bottom: 2rem; /* Espaço AUMENTADO entre o botão e os filtros */
+}
+
+/* Filter Controls (Estilo Base) */
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--color-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* Ajuste para os filtros DENTRO do novo cabeçalho */
+.page-header-filters .filter-controls {
+    padding: 0;
+    margin-bottom: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.search-wrapper {
+    flex-grow: 1;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: var(--font-secondary);
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-accent-light);
+}
+
+.sort-wrapper .btn {
+    width: 100%;
+}
+
+@media (min-width: 769px) {
+    .filter-controls {
+        flex-wrap: nowrap;
+    }
+    .sort-wrapper {
+        flex-shrink: 0;
+    }
+    .sort-wrapper .btn {
+        width: auto;
+    }
+}
